@@ -1,4 +1,13 @@
 RewriteEngine On
 
-RewriteCond %{HTTPS} off
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{REQUEST_URI} /(.+)/$
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ https://biblia-api.kosciolwroclaw.pl/%1 [R=301,L]
+
+RewriteCond %{REQUEST_URI} !(.+)/$
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.+)$ https://biblia-api.kosciolwroclaw.pl/$1/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} !^biblia-api\.(.*)$ [OR,NC]
+RewriteCond %{HTTPS} off  
+RewriteRule ^(.*)$ https://biblia-api.kosciolwroclaw.pl/$1 [R=301,L]
