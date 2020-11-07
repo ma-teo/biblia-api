@@ -1,12 +1,12 @@
 const express = require('express')
 const cors = require('cors')
-const variables = require('../data/variables.json')
+const variables = require('../../data/variables.json')
 const data = [
-  require('../data/EIB.json'),
-  require('../data/UBG.json'),
-  require('../data/BW.json'),
-  require('../data/KJV.json'),
-  require('../data/BBE.json'),
+  require('../../data/EIB.json'),
+  require('../../data/UBG.json'),
+  require('../../data/BW.json'),
+  require('../../data/KJV.json'),
+  require('../../data/BBE.json'),
 ]
 
 const app = express()
