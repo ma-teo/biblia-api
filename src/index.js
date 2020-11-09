@@ -9,13 +9,10 @@ const data = [
   require('../../data/BBE.json'),
 ]
 
-const app = express()
-
-app.use(cors())
-
-app.get('/', (req, res) => res.json(variables))
-app.get('/:bible', ({params}, res) => res.json(data[params.bible]))
-app.get('/:bible/:book', ({params}, res) => res.json(data[params.bible][params.book]))
-app.get('/:bible/:book/:chapter', ({params}, res) => res.json(data[params.bible][params.book][params.chapter]))
-
-app.listen(3000)
+express()
+  .use(cors())
+  .get('/', (req, res) => res.json(variables))
+  .get('/:bible', ({params}, res) => res.json(data[params.bible]))
+  .get('/:bible/:book', ({params}, res) => res.json(data[params.bible][params.book]))
+  .get('/:bible/:book/:chapter', ({params}, res) => res.json(data[params.bible][params.book][params.chapter]))
+  .listen(3000)
