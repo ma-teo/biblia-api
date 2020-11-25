@@ -12,9 +12,11 @@ const getVariables = () => {
 }
 
 const getBible = ({bible}) => {
+  const chapters = []
   const verses = []
 
   for (const book in data[bible]) {
+    chapters.push(data[bible][book].length)
     verses.push([])
 
     for (const chapter of data[bible][book]) {
@@ -26,14 +28,17 @@ const getBible = ({bible}) => {
     bible_ID: +bible,
     bible: variables.bibles[bible],
     books: variables.books,
+    chapters: chapters,
     verses: verses
   }
 }
 
 const getBook = ({bible, book}) => {
+  let chapters
   const verses = []
 
   for (const chapter of data[bible][book]) {
+    chapters = data[bible][book].length
     verses.push(chapter.length)
   }
 
@@ -42,6 +47,7 @@ const getBook = ({bible, book}) => {
     bible: variables.bibles[bible],
     book_ID: +book,
     book: variables.books[book],
+    chapters: chapters,
     verses: verses
   }
 }
