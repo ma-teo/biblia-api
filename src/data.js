@@ -1,4 +1,4 @@
-const variables = require('../../data/variables.json')
+const {bibles, books} = require('../../data/variables.json')
 const data = [
   require('../../data/EIB.json'),
   require('../../data/UBG.json'),
@@ -8,7 +8,21 @@ const data = [
 ]
 
 const getVariables = () => {
-  return variables
+  const chapters = []
+
+  for (const bible in data) {
+    chapters.push([])
+
+    for (const book in data[bible]) {
+      chapters[bible].push(data[bible][book].length)
+    }
+  }
+
+  return {
+    bibles: bibles,
+    books: books,
+    chapters: chapters
+  }
 }
 
 const getBible = ({bible}) => {
@@ -26,8 +40,8 @@ const getBible = ({bible}) => {
 
   return {
     bible_ID: +bible,
-    bible: variables.bibles[bible],
-    books: variables.books,
+    bible: bibles[bible],
+    books: books,
     chapters: chapters,
     verses: verses
   }
@@ -44,9 +58,9 @@ const getBook = ({bible, book}) => {
 
   return {
     bible_ID: +bible,
-    bible: variables.bibles[bible],
+    bible: bibles[bible],
     book_ID: +book,
-    book: variables.books[book],
+    book: books[book],
     chapters: chapters,
     verses: verses
   }
@@ -55,9 +69,9 @@ const getBook = ({bible, book}) => {
 const getChapter = ({bible, book, chapter}) => {
   return {
     bible_ID: +bible,
-    bible: variables.bibles[bible],
+    bible: bibles[bible],
     book_ID: +book,
-    book: variables.books[book],
+    book: books[book],
     chapter_ID: +chapter,
     verses: data[bible][book][chapter]
   }
@@ -66,9 +80,9 @@ const getChapter = ({bible, book, chapter}) => {
 const getVerse = ({bible, book, chapter, verse}) => {
   return {
     bible_ID: +bible,
-    bible: variables.bibles[bible],
+    bible: bibles[bible],
     book_ID: +book,
-    book: variables.books[book],
+    book: books[book],
     chapter_ID: +chapter,
     verse_ID: +verse,
     verse: data[bible][book][chapter][verse]
