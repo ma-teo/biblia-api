@@ -1,11 +1,6 @@
-const {bibles, books} = require('../../data/variables.json')
-const data = [
-  require('../../data/EIB.json'),
-  require('../../data/UBG.json'),
-  require('../../data/BW.json'),
-  require('../../data/KJV.json'),
-  require('../../data/BBE.json')
-]
+const { DATA_PATH } = require('./paths')
+const { bibles, books } = require(`${DATA_PATH}/variables.json`)
+const data = [...bibles.map(bible => require(`${DATA_PATH}/${bible}.json`))]
 
 const getVariables = () => {
   const chapters = []
